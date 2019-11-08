@@ -16,18 +16,18 @@ public class UserEntity implements Serializable {
 	private long id;
 
 	@Column(nullable = false, length = 50)
-	private long userId;
+	private String userId;
 	@Column(nullable = false, length = 50)
-	private long userName;
+	private String firstName;
 	@Column(nullable = false, length = 50)
-	private long lastName;
+	private String lastName;
 	@Column(nullable = false, length = 120)
 	private String email;
 	@Column(nullable = false)
 	private String encyptedPassword;
 	private String emailVerificationToken;
-	@Column(nullable = false, columnDefinition = "boolean default false")
-	private Boolean emailVerificationStatus;
+	@Column(nullable = false)
+	private Boolean emailVerificationStatus= false;
 
 	public long getId() {
 		return id;
@@ -37,27 +37,29 @@ public class UserEntity implements Serializable {
 		this.id = id;
 	}
 
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public long getUserName() {
-		return userName;
+
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setUserName(long userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public long getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(long lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 

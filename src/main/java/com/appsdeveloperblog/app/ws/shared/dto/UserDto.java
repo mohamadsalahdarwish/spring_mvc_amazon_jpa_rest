@@ -6,36 +6,37 @@ public class UserDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private long id;
-	private long userId;
-	private long userName;
-	private long lastName;
+	private String userId;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
 	private String encyptedPassword;
 	private String emailVerificationToken;
-	private Boolean emailVerificationStatus;
+	private Boolean emailVerificationStatus = false;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public long getUserName() {
-		return userName;
+	
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setUserName(long userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public long getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
-	public void setLastName(long lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	public String getEmail() {

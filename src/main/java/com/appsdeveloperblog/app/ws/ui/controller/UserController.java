@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.app.ws.mobileappws2.ui.controller;
+package com.appsdeveloperblog.app.ws.ui.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
