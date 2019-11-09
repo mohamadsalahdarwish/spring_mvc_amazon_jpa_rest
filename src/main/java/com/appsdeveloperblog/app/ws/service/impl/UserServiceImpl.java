@@ -1,7 +1,13 @@
 package com.appsdeveloperblog.app.ws.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appsdeveloperblog.app.ws.io.entity.UserEntity;
@@ -20,6 +26,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	Utils utils;
 	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	public UserDto createUser(UserDto user) {
 		if(userRepository.findByEmail(user.getEmail()) != null) {
@@ -29,12 +38,19 @@ public class UserServiceImpl implements UserService{
 		BeanUtils.copyProperties(user, userEntity);
 		String publicUserId = utils.generateUserId(30);
 		
-		userEntity.setEncyptedPassword("test");
+		userEntity.setEncyptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(publicUserId);
 		UserEntity storedUserDetails = userRepository.save(userEntity);
 		UserDto returnValue = new UserDto();
 		BeanUtils.copyProperties(storedUserDetails, returnValue);
 		return returnValue;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null) throw new UsernameNotFoundException(email);
+		return new User(userEntity.getEmail(), userEntity.getEncyptedPassword(), new ArrayList<>());
 	}
 
 }
